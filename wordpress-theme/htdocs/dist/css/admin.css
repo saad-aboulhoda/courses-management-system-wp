@@ -578,6 +578,9 @@ video {
 .gap-2 {
   gap: 0.5rem;
 }
+.text-wrap {
+  text-wrap: wrap;
+}
 .rounded {
   border-radius: 0.25rem;
 }
