@@ -187,14 +187,28 @@ const changeOrder = async (event) => {
   if (event.oldIndex === event.newIndex) return;
   isUpdating.value = true
   const start = (currentPage.value - 1) * itemsPerPage.value;
-  const lessonOne = lessons.value[event.oldIndex + start];
-  const lessonTwo = lessons.value[event.newIndex + start];
-  const lessonOneNumber = lessonOne.lesson_number;
-  lessonOne.lesson_number = lessonTwo.lesson_number;
-  lessonTwo.lesson_number = lessonOneNumber;
+  const oldIndex = event.oldIndex + start
+  const newIndex = event.newIndex + start;
+  // Ordering lessons
+  // Remove lesson from the array
+  const removedLesson = lessons.value.splice(oldIndex, 1)[0];
+  // Insert lesson at the new index
+  lessons.value.splice(newIndex, 0, removedLesson);
+  // Update lessons order that are between old and new index
   try {
-    await updateLesson(lessonOne);
-    await updateLesson(lessonTwo);
+    const promises = [];
+    if (oldIndex < newIndex) {
+      for (let i = oldIndex; i <= newIndex; i++) {
+        lessons.value[i].lesson_number = i + 1;
+        promises.push(updateLesson(lessons.value[i]))
+      }
+    } else {
+      for (let i = newIndex; i <= oldIndex; i++) {
+        lessons.value[i].lesson_number = i + 1;
+        promises.push(updateLesson(lessons.value[i]))
+      }
+    }
+    await Promise.all(promises);
   } catch (error) {
     await fetchLessons();
     console.error('Error updating lesson order:', error);
