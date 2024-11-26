@@ -20227,7 +20227,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     };
     var changeOrder = /*#__PURE__*/function () {
       var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(event) {
-        var start, lessonOne, lessonTwo, lessonOneNumber;
+        var start, oldIndex, newIndex, removedLesson, promises, i, _i;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
@@ -20239,36 +20239,46 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 2:
               isUpdating.value = true;
               start = (currentPage.value - 1) * itemsPerPage.value;
-              lessonOne = lessons.value[event.oldIndex + start];
-              lessonTwo = lessons.value[event.newIndex + start];
-              lessonOneNumber = lessonOne.lesson_number;
-              lessonOne.lesson_number = lessonTwo.lesson_number;
-              lessonTwo.lesson_number = lessonOneNumber;
-              _context5.prev = 9;
-              _context5.next = 12;
-              return updateLesson(lessonOne);
-            case 12:
-              _context5.next = 14;
-              return updateLesson(lessonTwo);
-            case 14:
-              _context5.next = 21;
-              break;
-            case 16:
-              _context5.prev = 16;
-              _context5.t0 = _context5["catch"](9);
+              oldIndex = event.oldIndex + start;
+              newIndex = event.newIndex + start; // Ordering lessons
+              // Remove lesson from the array
+              removedLesson = lessons.value.splice(oldIndex, 1)[0]; // Insert lesson at the new index
+              lessons.value.splice(newIndex, 0, removedLesson);
+              // Update lessons order that are between old and new index
+              _context5.prev = 8;
+              promises = [];
+              if (oldIndex < newIndex) {
+                for (i = oldIndex; i <= newIndex; i++) {
+                  lessons.value[i].lesson_number = i + 1;
+                  promises.push(updateLesson(lessons.value[i]));
+                }
+              } else {
+                for (_i = newIndex; _i <= oldIndex; _i++) {
+                  lessons.value[_i].lesson_number = _i + 1;
+                  promises.push(updateLesson(lessons.value[_i]));
+                }
+              }
+              _context5.next = 13;
+              return Promise.all(promises);
+            case 13:
               _context5.next = 20;
+              break;
+            case 15:
+              _context5.prev = 15;
+              _context5.t0 = _context5["catch"](8);
+              _context5.next = 19;
               return fetchLessons();
-            case 20:
+            case 19:
               console.error('Error updating lesson order:', _context5.t0);
-            case 21:
-              _context5.prev = 21;
+            case 20:
+              _context5.prev = 20;
               isUpdating.value = false;
-              return _context5.finish(21);
-            case 24:
+              return _context5.finish(20);
+            case 23:
             case "end":
               return _context5.stop();
           }
-        }, _callee5, null, [[9, 16, 21, 24]]);
+        }, _callee5, null, [[8, 15, 20, 23]]);
       }));
       return function changeOrder(_x3) {
         return _ref6.apply(this, arguments);
