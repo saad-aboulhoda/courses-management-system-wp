@@ -56,8 +56,13 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
     ```sh
     php artisan key:generate
    ```
+
+ 6. **Start the development server and visit the link to start WordPress Installation:**
+    ```sh
+    php artisan serve
+   ```
    
-6. **Run the migrations:**
+7. **Run the migrations:**
     ```sh
     php artisan migrate
    ```
@@ -67,7 +72,7 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
     resources/js/config.js
    ```
 
-8. **Build the front-end assets:**
+9. **Build the front-end assets:**
     ```sh
     npm run dev
    ```
@@ -81,6 +86,11 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
    
 2. **Access the application:**
    Open your browser and go to `http://127.0.0.1:8000`.
+
+ ## If you're using Ubuntu or any Linux OS make sure make these files writable:
+ - `storage`
+ - `bootstrap/cashe`
+ - `htdocs/content`
 
 ## Contributing
 
