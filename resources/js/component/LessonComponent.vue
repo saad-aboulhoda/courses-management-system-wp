@@ -21,7 +21,7 @@ const isUpdating = ref(false);
 
 const axiosInstance = axios.create({
   baseURL: `${config.api.baseUrl}/lessons`,
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
