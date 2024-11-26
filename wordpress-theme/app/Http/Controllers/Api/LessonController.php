@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Lesson;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LessonController extends Controller
 {
@@ -15,15 +17,7 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Lesson::query();
-
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
-        }
-
-        $lessons = $query->where('course_id', $request->input('course_id'))
+        $lessons = Lesson::where('course_id', $request->input('course_id'))
             ->paginate(10);
 
         return response()->json($lessons);
@@ -70,7 +64,7 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -94,6 +88,7 @@ class LessonController extends Controller
     public function update(Request $request, Lesson $lesson): JsonResponse
     {
         $lesson->title = $request->title;
+        $lesson->createSlug();
         $lesson->description = $request->description;
         $lesson->google_video_id = $request->google_video_id;
         $lesson->course_id = $request->course_id;
