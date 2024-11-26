@@ -33,6 +33,7 @@ class Courses extends Hookable
                 'has_archive' => true,
                 'menu_icon' => 'dashicons-welcome-learn-more',
                 'supports' => ['title', 'thumbnail'],
+                'taxonomies' => ['category'],
             ])
             ->set();
     }
@@ -45,11 +46,14 @@ class Courses extends Hookable
     {
         Metabox::make('details', $this->slug)
             ->add(new Section('details', 'Details', [
-                Field::text('description'),
                 Field::text('instructor'),
                 Field::text('difficulty'),
                 Field::text('total_hours'),
-
+                Field::textarea('description', [
+                    'attributes' => [
+                        'rows' => 5,
+                    ]
+                ])
             ]))
             ->set();
 
