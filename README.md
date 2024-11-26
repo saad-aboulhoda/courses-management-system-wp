@@ -64,7 +64,7 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
 
 8. **Change api `baseUrl` in `config.js` file (default is `http://127.0.0.1:8000/api`):**
     ```sh
-    resources/assets/js/config.js
+    resources/js/config.js
    ```
 
 8. **Build the front-end assets:**
