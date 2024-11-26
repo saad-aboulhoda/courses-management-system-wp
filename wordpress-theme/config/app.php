@@ -198,7 +198,8 @@ return [
         App\Hooks\Mail::class,
         App\Hooks\Widgets::class,
         App\Hooks\PostTypes\Courses::class,
-        App\Hooks\Admin\Assets::class
+        App\Hooks\Admin\Assets::class,
+        App\Hooks\Admin\ThemeSupport::class,
     ],
 
     /*
