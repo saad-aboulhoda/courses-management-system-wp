@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\LessonController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\LessonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('lessons', LessonController::class)->only(['store', 'update', 'destroy']);
+Route::get('lessons/course/{courseId}', [LessonController::class, 'findByCourse']);
 
