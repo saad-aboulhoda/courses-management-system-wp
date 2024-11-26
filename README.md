@@ -30,7 +30,7 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
    ```
    then:
    ```sh
-   cd wordpress-theme-dev/wordpress-theme
+   cd wordpress-theme-dev
    ```
 
 2. **Install PHP dependencies:**
