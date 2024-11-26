@@ -26,7 +26,7 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/n1akai/wordpress-theme-dev
+   git clone https://github.com/n1akai/courses-management-system-wp.git
    ```
    then:
    ```sh
