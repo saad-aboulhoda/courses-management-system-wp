@@ -16,6 +16,7 @@ class CreateLessonsTable extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->nullable()->index();
             $table->text('description');
             $table->string('google_video_id');
             $table->unsignedBigInteger('course_id');
