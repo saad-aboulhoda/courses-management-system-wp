@@ -60,8 +60,7 @@ lessons, including adding, updating, deleting, and sorting lessons within each c
  6. **Start the development server and visit the link to start WordPress Installation:**
     ```sh
     php artisan serve
-   ```
-   
+    
 7. **Run the migrations:**
     ```sh
     php artisan migrate
