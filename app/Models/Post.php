@@ -52,6 +52,10 @@ class Post extends Model
         return get_post_permalink($this->ID);
     }
 
+    public function firstLesson() {
+        return $this->lessons()->first();
+    }
+
     public static function fromPost($post): Post
     {
         $course = new Post();

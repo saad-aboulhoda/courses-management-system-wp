@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class LessonController extends Controller
 {
     public function show($slug, Lesson $lesson) {
-        return view('lesson.show', compact('lesson'));
+        return view('pages.lesson', compact('lesson'));
     }
 }

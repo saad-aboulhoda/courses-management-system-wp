@@ -19986,7 +19986,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     var isUpdating = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var axiosInstance = axios__WEBPACK_IMPORTED_MODULE_6__["default"].create({
       baseURL: "".concat(_config__WEBPACK_IMPORTED_MODULE_5__["default"].api.baseUrl, "/lessons"),
-      timeout: 1000,
+      timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -20373,9 +20373,16 @@ __webpack_require__.r(__webpack_exports__);
     __expose();
     var props = __props;
     var emit = __emit;
+    function extractDriveId(input) {
+      var match = input.match(/\/d\/([a-zA-Z0-9_-]+)/);
+
+      // If there's a match, return the ID; otherwise, assume input is already an ID
+      return match ? match[1] : input;
+    }
     var __returned__ = {
       props: props,
       emit: emit,
+      extractDriveId: extractDriveId,
       LoadingIconComponent: _LoadingIconComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       SuccessIconComponent: _SuccessIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
@@ -20595,10 +20602,11 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "p-[8px]"
 };
-var _hoisted_4 = {
+var _hoisted_4 = ["value"];
+var _hoisted_5 = {
   "class": "p-[8px] bg-[#F0F2F5] flex items-center"
 };
-var _hoisted_5 = ["disabled"];
+var _hoisted_6 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "lesson bg-[#F0F2F5] hover:bg-[#d8dadf] duration-300 p-2 cursor-pointer flex justify-between items-center",
@@ -20623,20 +20631,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     rows: "5",
     placeholder: "Lesson Description",
     "class": "resize-none block w-full min-h-[30px] px-[8px] border-[1px] border-solid border-[#8c8f94] rounded-[4px] mb-3"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.lesson.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $props.lesson.google_video_id = $event;
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.lesson.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    value: $props.lesson.google_video_id,
+    onInput: _cache[4] || (_cache[4] = function (event) {
+      $props.lesson.google_video_id = $setup.extractDriveId(event.target.value);
     }),
     placeholder: "Lesson URL",
     "class": "block w-full min-h-[30px] px-[8px] border-[1px] border-solid border-[#8c8f94] rounded-[4px]"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.lesson.google_video_id]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     disabled: $props.lesson.loading,
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$emit('execSave', $props.index);
     }),
     "class": "button button-primary"
-  }, " Save ", 8 /* PROPS */, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingIconComponent"], {
+  }, " Save ", 8 /* PROPS */, _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingIconComponent"], {
     "is-loading": $props.lesson.loading
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27014,7 +27023,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LessonComponent_vue_vue_type_template_id_3555a765_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=template&id=3555a765&scoped=true */ "./resources/js/component/LessonComponent.vue?vue&type=template&id=3555a765&scoped=true");
 /* harmony import */ var _LessonComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=script&setup=true&lang=js */ "./resources/js/component/LessonComponent.vue?vue&type=script&setup=true&lang=js");
 /* harmony import */ var _LessonComponent_vue_vue_type_style_index_0_id_3555a765_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=style&index=0&id=3555a765&scoped=true&lang=css */ "./resources/js/component/LessonComponent.vue?vue&type=style&index=0&id=3555a765&scoped=true&lang=css");
-/* harmony import */ var C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -27022,7 +27031,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LessonComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LessonComponent_vue_vue_type_template_id_3555a765_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3555a765"],['__file',"resources/js/component/LessonComponent.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_LessonComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LessonComponent_vue_vue_type_template_id_3555a765_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3555a765"],['__file',"resources/js/component/LessonComponent.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -27044,13 +27053,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _LessonItemComponent_vue_vue_type_template_id_a2bce9dc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LessonItemComponent.vue?vue&type=template&id=a2bce9dc */ "./resources/js/component/LessonItemComponent.vue?vue&type=template&id=a2bce9dc");
 /* harmony import */ var _LessonItemComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LessonItemComponent.vue?vue&type=script&setup=true&lang=js */ "./resources/js/component/LessonItemComponent.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LessonItemComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LessonItemComponent_vue_vue_type_template_id_a2bce9dc__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/LessonItemComponent.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LessonItemComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LessonItemComponent_vue_vue_type_template_id_a2bce9dc__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/LessonItemComponent.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -27072,13 +27081,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _LoadingIconComponent_vue_vue_type_template_id_67c88f98__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoadingIconComponent.vue?vue&type=template&id=67c88f98 */ "./resources/js/component/LoadingIconComponent.vue?vue&type=template&id=67c88f98");
 /* harmony import */ var _LoadingIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoadingIconComponent.vue?vue&type=script&setup=true&lang=js */ "./resources/js/component/LoadingIconComponent.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LoadingIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LoadingIconComponent_vue_vue_type_template_id_67c88f98__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/LoadingIconComponent.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LoadingIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LoadingIconComponent_vue_vue_type_template_id_67c88f98__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/LoadingIconComponent.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -27100,13 +27109,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _SuccessIconComponent_vue_vue_type_template_id_b3da909e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SuccessIconComponent.vue?vue&type=template&id=b3da909e */ "./resources/js/component/SuccessIconComponent.vue?vue&type=template&id=b3da909e");
 /* harmony import */ var _SuccessIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SuccessIconComponent.vue?vue&type=script&setup=true&lang=js */ "./resources/js/component/SuccessIconComponent.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_projects_wordpress_wordpress_theme_dev_wordpress_theme_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SuccessIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SuccessIconComponent_vue_vue_type_template_id_b3da909e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/SuccessIconComponent.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ADMIN_Documents_Github_Repositories_courses_management_system_wp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SuccessIconComponent_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SuccessIconComponent_vue_vue_type_template_id_b3da909e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/SuccessIconComponent.vue"]])
 /* hot reload */
 if (false) {}
 
