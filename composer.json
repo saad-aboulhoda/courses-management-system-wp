@@ -1,17 +1,13 @@
 {
-  "name": "themosis/themosis",
-  "description": "Themosis, a WordPress framework.",
-  "keywords": ["themosis", "framework", "wordpress"],
+  "name": "n1akai/doros-online",
+  "description": "Courses Wordpress Theme.",
+  "keywords": ["Courses", "Programming", "Online"],
   "license": "GPL-2.0-or-later",
-  "support": {
-    "issues": "https://github.com/themosis/framework/issues",
-    "source": "https://github.com/themosis/framework"
-  },
   "authors": [
     {
-      "name": "Julien Lambé",
-      "email": "julien@themosis.com",
-      "homepage": "https://www.themosis.com/"
+      "name": "Saad Aboulhoda",
+      "email": "saad@aboulhoda.me",
+      "homepage": "https://www.aboulhoda.me"
     }
   ],
   "type": "project",

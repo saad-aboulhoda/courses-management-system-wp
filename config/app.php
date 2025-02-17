@@ -197,9 +197,11 @@ return [
         App\Hooks\Compat::class,
         App\Hooks\Mail::class,
         App\Hooks\Widgets::class,
-        App\Hooks\PostTypes\Courses::class,
         App\Hooks\Admin\Assets::class,
         App\Hooks\Admin\ThemeSupport::class,
+        App\Hooks\PostTypes::class,
+        App\Hooks\Taxonomies::class,
+        App\Hooks\MetaBoxes::class
     ],
 
     /*

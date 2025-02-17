@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sirin+Stencil&display=swap");
-
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sirin+Stencil&display=swap);
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,9 @@
     --bottom-navigation-height: 56px;
     --overlay-background: rgb(0 0 0 / 0.4);
     --notifications-box-shadow: 0 0 16px rgb(0 0 0 / 0.3);
+    --focus-box-shadow: 0 0 0 0.25rem rgba(13, 148, 136, 0.25);
 
+    --light-primary: #5dfdef;
     --primary: #0d9488;
     --primary-hover: #0b736a;
     --bg-body: #f0f2f5;
@@ -50,6 +51,14 @@
 
 /* Utils - Start */
 
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.aspect-ratio-16x9 {
+    aspect-ratio: 16/9;
+}
+
 .btn-primary {
     background-color: var(--primary) !important;
     border-color: var(--primary) !important;
@@ -64,6 +73,7 @@
 }
 
 .w-fit {
+    width: -moz-fit-content;
     width: fit-content;
 }
 
@@ -96,6 +106,9 @@
 
 /* General - Start */
 
+textarea {
+    resize: none;
+}
 
 body {
     font-family: "Open Sans", sans-serif;
@@ -120,6 +133,52 @@ header nav ul li a {
     font-size: 14px !important;
 }
 
+header .search {
+    position: relative;
+}
+
+header .search ul {
+    position: absolute;
+    list-style: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 0;
+    background-color: var(--bg-primary);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-top: unset;
+    display: none;
+}
+
+header .search ul li a {
+    padding: 8px;
+    color: unset;
+    text-decoration: unset;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+header .search ul li a:hover {
+    background-color: var(--hover-bg-primary);
+}
+
+header .search ul li a img {
+    border-radius: 2px;
+}
+
+header .search ul li a h5 {
+    font-size: 14px;
+    margin-left: 4px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 0;
+}
+
 footer {
     background-color: var(--bg-primary);
 }
@@ -139,7 +198,7 @@ footer .copyright {
     color: var(--primary);
 }
 
-.breadcrumb-item>* {
+.breadcrumb-item > * {
     padding: 0 3px;
 }
 
@@ -148,7 +207,7 @@ footer .copyright {
 /* Home Page - Start */
 
 #myCarousel {
-    height: calc(100vh - 56px);
+    height: calc(100vh - 250px);
 }
 
 #myCarousel .carousel-img-container {
@@ -163,7 +222,8 @@ footer .copyright {
 #myCarousel .carousel-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 
 #myCarousel .carousel-img-container::after {
@@ -183,7 +243,8 @@ footer .copyright {
 .lesson-thumbnail {
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 
 .cat {
@@ -225,13 +286,12 @@ footer .copyright {
     flex-wrap: wrap;
 }
 
-.lessons-list>* {
+.lessons-list > * {
     width: 100%;
     background-color: var(--bg-secondary);
     border-radius: 6px;
     display: flex;
     align-items: center;
-    text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 8px;
     color: unset;
@@ -256,6 +316,7 @@ footer .copyright {
 
 .lessons-list .lessons-item .lesson-date {
     margin-inline-start: auto;
+    font-size: 15px;
 }
 
 /* Course Details - End */
@@ -276,6 +337,7 @@ footer .copyright {
     left: 8px;
     width: 300px;
     z-index: 10;
+    bottom: 8px;
 }
 
 #sidebar.active {
@@ -285,13 +347,13 @@ footer .copyright {
 .video-iframe {
     width: 100%;
     aspect-ratio: 16/9;
+    max-height: calc(100vh - 100px);
 }
 
 .lesson-list {
     display: flex;
     flex-direction: column;
     list-style: none;
-    height: 100vh;
     padding: 0;
 }
 
@@ -312,15 +374,21 @@ footer .copyright {
     margin-left: auto;
 }
 
-.lesson-list .lesson-item>div {
+.lesson-list .lesson-item > div {
     width: 100%;
 }
 
-.lesson-list .lesson-item>div p {
+.lesson-list .lesson-item > div p {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lesson-list .lesson-item > div p span.lesson-number {
+    color: var(--text-secondary);
 }
 
 .lesson-list .lesson-item.active {
@@ -374,3 +442,133 @@ footer .copyright {
 
 
 /* Lesson Page - End */
+
+/* About Page - Start */
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://127.0.0.1:8000/content/uploads/2025/01/susan-q-yin-2JIvboGLeho-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    -o-object-fit: cover;
+       object-fit: cover;
+}
+
+/* About Page - End */
+
+/* Contact Page - Start */
+
+section.hero {
+    position: relative;
+    color: white;
+    padding: 120px 0;
+}
+
+section.hero .img-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+section.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+section.hero .img-container img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+    background: #e9ecef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.contact-info-item h5 {
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.contact-info-item p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+/* Contact Page - End */
+
+/* Components */
+
+.course-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-body .course-body-footer {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-content: end;
+}
+
+/* Pagination Colors */
+
+.pagination {
+    --bs-pagination-color: var(--primary);
+    --bs-pagination-hover-color: var(--primary);
+    --bs-pagination-active-bg: var(--primary);
+    --bs-pagination-active-border-color: var(--primary);
+    --bs-pagination-focus-color: var(--primary);
+    --bs-pagination-focus-box-shadow: var(--focus-box-shadow);
+}
+
+/* Change Input Focus Background Color */
+.form-control:focus {
+    box-shadow: var(--focus-box-shadow);
+    border-color: var(--light-primary);
+}
+
+/* More Courses Arrow */
+.more-courses-arrow {
+    position: absolute;
+    top: 8px;
+    right: 0;
+}

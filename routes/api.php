@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\LessonController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('lessons', LessonController::class)->only(['store', 'update', 'destroy']);
-Route::get('lessons/course/{courseId}', [LessonController::class, 'findByCourse']);
-
+Route::apiResource('lessons', LessonController::class)->only(['store', 'update', 'destroy'])->middleware('wp.can');
+Route::get('lessons/course/{courseId}', [LessonController::class, 'findByCourse'])->middleware('wp.can');
+Route::get('courses/search/{value}', [CourseController::class, 'search']);

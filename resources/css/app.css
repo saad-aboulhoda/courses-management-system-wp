@@ -1,0 +1,570 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sirin+Stencil&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --header-height: 59px;
+    --md-header-height: 65.8px;
+    --bottom-navigation-height: 56px;
+    --overlay-background: rgb(0 0 0 / 0.4);
+    --notifications-box-shadow: 0 0 16px rgb(0 0 0 / 0.3);
+    --focus-box-shadow: 0 0 0 0.25rem rgba(13, 148, 136, 0.25);
+
+    --light-primary: #5dfdef;
+    --primary: #0d9488;
+    --primary-hover: #0b736a;
+    --bg-body: #f0f2f5;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f8f8;
+    --text-primary: #050505;
+    --text-secondary: #65676b;
+    --icon-primary: #050505;
+    --icon-secondary: #65676b;
+    --hover-bg-body: #e4e6e9;
+    --hover-bg-primary: #f2f2f2;
+    --hover-bg-secondary: #d8dadf;
+    --success: #0b960b;
+    --danger: #a10606;
+    --warning: #c28108;
+    --info: #a6a607;
+    --danger-hover: #7a0606;
+}
+
+.dark {
+    --overlay-background: rgb(0 0 0 / 0.8);
+
+    --bg-body: #18191a;
+    --bg-primary: #242526;
+    --bg-secondary: #3a3b3c;
+    --text-primary: #e4e6eb;
+    --text-secondary: #b0b3b8;
+    --icon-primary: #e4e6eb;
+    --icon-secondary: #b0b3b8;
+    --hover-bg-body: #303031;
+    --hover-bg-primary: #3a3b3c;
+    --hover-bg-secondary: #4e4f50;
+}
+
+/* Utils - Start */
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.aspect-ratio-16x9 {
+    aspect-ratio: 16/9;
+}
+
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+.w-fit {
+    width: fit-content;
+}
+
+.box-shadow {
+    box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 0.05);
+}
+
+.line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+/* Utils - End */
+
+/* General - Start */
+
+textarea {
+    resize: none;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: var(--bg-body);
+}
+
+header {
+    background-color: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+header .navbar-brand {
+    color: var(--primary);
+    font-family: "Sirin Stencil", sans-serif;
+    font-size: 20px !important;
+}
+
+header nav ul li a {
+    font-size: 14px !important;
+}
+
+header .search {
+    position: relative;
+}
+
+header .search ul {
+    position: absolute;
+    list-style: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 0;
+    background-color: var(--bg-primary);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-top: unset;
+    display: none;
+}
+
+header .search ul li a {
+    padding: 8px;
+    color: unset;
+    text-decoration: unset;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+header .search ul li a:hover {
+    background-color: var(--hover-bg-primary);
+}
+
+header .search ul li a img {
+    border-radius: 2px;
+}
+
+header .search ul li a h5 {
+    font-size: 14px;
+    margin-left: 4px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: var(--bg-primary);
+}
+
+footer .copyright {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.breadcrumb-item > * {
+    padding: 0 3px;
+}
+
+/* General - End */
+
+/* Home Page - Start */
+
+#myCarousel {
+    height: calc(100vh - 250px);
+}
+
+#myCarousel .carousel-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#myCarousel .carousel-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#myCarousel .carousel-img-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Home Page - End */
+
+/* Course Details - Start */
+
+.lesson-thumbnail {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.cat {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cat-title {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 4px 6px;
+    text-align: center;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cat i {
+    font-size: 12px;
+    margin-inline-end: 4px;
+}
+
+.cat-text {
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.cat-description {
+    padding: 0 8px;
+    height: 100%;
+}
+
+.lessons-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lessons-list > * {
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    color: unset;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.lessons-list .lessons-item .lesson-number {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.lessons-list .lessons-item .lesson-number::after {
+    content: '-';
+    margin: 8px;
+}
+
+.lessons-list .lessons-item .lesson-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lessons-list .lessons-item .lesson-date {
+    margin-inline-start: auto;
+    font-size: 15px;
+}
+
+/* Course Details - End */
+
+/* Lesson Page - Start */
+
+.content-wrapper {
+    display: flex;
+    padding: 8px;
+    position: relative;
+}
+
+#sidebar {
+    transform: translateX(-120%);
+    transition: 0.3s;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 300px;
+    z-index: 10;
+    bottom: 8px;
+}
+
+#sidebar.active {
+    transform: translateX(0);
+}
+
+.video-iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    max-height: calc(100vh - 100px);
+}
+
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+}
+
+.lesson-list .lesson-item {
+    padding: 12px 6px;
+    display: flex;
+    cursor: pointer;
+    color: unset;
+    flex-wrap: wrap;
+    text-decoration: none;
+    line-height: 1;
+    min-height: 72.8px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+}
+
+.lesson-list .lesson-item p {
+    margin: 0;
+    margin-left: auto;
+}
+
+.lesson-list .lesson-item > div {
+    width: 100%;
+}
+
+.lesson-list .lesson-item > div p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lesson-list .lesson-item > div p span.lesson-number {
+    color: var(--text-secondary);
+}
+
+.lesson-list .lesson-item.active {
+    background-color: var(--hover-bg-primary);
+}
+
+.lesson-list .lesson-item:hover {
+    background-color: var(--hover-bg-primary);
+}
+
+#videoContainer {
+    transition: 0.3s;
+}
+
+@media (min-width: 992px) {
+    #videoContainer.sidebar {
+        margin-left: 316px;
+    }
+}
+
+#toggle-btn {
+    background-color: rgb(0 0 0/0.8);
+    width: 40px;
+    height: 40px;
+    top: 12px;
+    left: 12px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#toggle-btn svg {
+    transition: 0.3s;
+}
+
+#toggle-btn svg.active {
+    transform: rotate(180deg);
+}
+
+.comment {
+    border-bottom: 1px solid rgb(0 0 0 / 0.2);
+    padding: 10px 16px;
+}
+
+.comment:last-child {
+    border-bottom: unset;
+}
+
+.comment:hover {
+    background-color: #eee;
+}
+
+
+/* Lesson Page - End */
+
+/* About Page - Start */
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://127.0.0.1:8000/content/uploads/2025/01/susan-q-yin-2JIvboGLeho-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* About Page - End */
+
+/* Contact Page - Start */
+
+section.hero {
+    position: relative;
+    color: white;
+    padding: 120px 0;
+}
+
+section.hero .img-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+section.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+section.hero .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+    background: #e9ecef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.contact-info-item h5 {
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.contact-info-item p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+/* Contact Page - End */
+
+/* Components */
+
+.course-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-body .course-body-footer {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-content: end;
+}
+
+/* Pagination Colors */
+
+.pagination {
+    --bs-pagination-color: var(--primary);
+    --bs-pagination-hover-color: var(--primary);
+    --bs-pagination-active-bg: var(--primary);
+    --bs-pagination-active-border-color: var(--primary);
+    --bs-pagination-focus-color: var(--primary);
+    --bs-pagination-focus-box-shadow: var(--focus-box-shadow);
+}
+
+/* Change Input Focus Background Color */
+.form-control:focus {
+    box-shadow: var(--focus-box-shadow);
+    border-color: var(--light-primary);
+}
+
+/* More Courses Arrow */
+.more-courses-arrow {
+    position: absolute;
+    top: 8px;
+    right: 0;
+}

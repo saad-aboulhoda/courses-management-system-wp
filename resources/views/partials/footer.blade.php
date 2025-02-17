@@ -16,10 +16,19 @@
             <a
                     data-mdb-ripple-init
                     class="btn btn-link btn-floating btn-lg text-body m-1"
-                    href="https://github.com/n1akai"
+                    href="https://github.com/saad-aboulhoda"
                     role="button"
                     data-mdb-ripple-color="dark"
             ><i class="fab fa-github"></i
+                ></a>
+                            <!-- Github -->
+            <a
+                    data-mdb-ripple-init
+                    class="btn btn-link btn-floating btn-lg text-body m-1"
+                    href="https://aboulhoda.me"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+            ><i class="fa-solid fa-globe"></i
                 ></a>
         </section>
         <!-- Section: Social media -->
@@ -28,8 +37,11 @@
 
     <!-- Copyright -->
     <div class="text-center p-3 copyright">
-        © 2024 Copyright
+        © 2024 - {{ date('Y') }} Copyright - Version: 0.2
     </div>
     <!-- Copyright -->
     {{ wp_footer()  }}
+
+    <!-- Script -->
+    <script src="{{ asset('dist/js/script.js')  }}"></script>
 </footer>

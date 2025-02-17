@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class Lesson extends Model
@@ -28,13 +30,14 @@ class Lesson extends Model
         return $this->belongsTo(Post::class, 'course_id');
     }
 
-    public function link(): string
+    public function link(): Attribute
     {
-        return config('url') . '/courses/' . $this->course->post_name . '/lessons/' . $this->slug;
+        return Attribute::get(fn() => URL::to("courses/{$this->course->post_name}/lessons/{$this->slug}"));
     }
 
-    public function lessons() {
-        return self::where('course_id', $this->course->ID)->get();
+    public function theTitle(): Attribute
+    {
+        return Attribute::get(fn() => "{$this->lesson_number} - {$this->title}");
     }
 
     public function createSlug()

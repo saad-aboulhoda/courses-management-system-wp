@@ -123,5 +123,10 @@ class Application extends Hookable
         } catch (AssetException $e) {
             logger($e->getMessage());
         }
+
+        Filter::add('themosis_front_global', function($data) {
+            $data['apiUrl'] = env('APP_URL') . '/api';
+            return $data;
+        });
     }
 }

@@ -36,7 +36,7 @@ class Kernel extends HttpKernel
         ],
         'api' => [
             'throttle:60,1',
-            'wp.can:edit_posts',
+            //'wp.can:edit_posts',
             'bindings'
         ]
     ];

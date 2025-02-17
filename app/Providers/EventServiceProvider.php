@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CourseCreated;
+use App\Listeners\CoursesCacher;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\Facades\Event;
@@ -17,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class
+        ],
+        CourseCreated::class => [
+            CoursesCacher::class
         ]
     ];
 

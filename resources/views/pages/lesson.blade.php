@@ -1,42 +1,11 @@
-{{--
-<h3>Lesson details</h3>
-<ul>
-    <li>Title: {{ $lesson->lesson_number }} : {{ $lesson->title }}</li>
-    <li>Description: {{ $lesson->description }}</li>
-    <li>Google Video ID: {{ $lesson->google_video_id }}</li>
-</ul>
-
-<h3>Course details</h3>
-<ul>
-    <li>Title: {{ $lesson->course->post_title }}</li>
-    <li>Author: {{ $lesson->course->post_author }}</li>
-    <li>Date: {{ $lesson->course->post_date }}</li>
-    <li>Description: {{ $lesson->course->description() }}</li>
-    <li>Instructor: {{ $lesson->course->instructor() }}</li>
-    <li>Difficulty: {{ $lesson->course->difficulty() }}</li>
-    <li>Total hours: {{ $lesson->course->totalHours() }}</li>
-</ul>
-
-<h3>All lessons</h3>
-<ul>
-    @foreach($lesson->lessons() as $lessonL)
-        <li><a href="{{ $lessonL->link()  }}">{{ $lessonL->lesson_number }} :{{ $lessonL->title }}</a>@if($lesson->id == $lessonL->id) (Current Lesson) @endif</li>
-    @endforeach
-</ul>--}}
-
-@extends('layout.app')
-
-@section('title', "Lesson")
-
-@section('content')
-
+<x-layout title="{{ $lesson->theTitle }}">
     <div class="pt-3">
         <div class="container-fluid">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Courses</a></li>
-                <li class="breadcrumb-item"><a href="{{$lesson->course->link()}}">{{$lesson->course->post_title}}</a>
+                <li class="breadcrumb-item"><a href="/courses">Courses</a></li>
+                <li class="breadcrumb-item"><a href="{{$lesson->course->link}}">{{$lesson->course->post_title}}</a>
                 </li>
-                <li class="breadcrumb-item"><span>{{ $lesson->title }}</span></li>
+                <li class="breadcrumb-item"><span>{{ $lesson->theTitle }}</span></li>
             </ol>
         </div>
     </div>
@@ -44,18 +13,20 @@
     <div class="content-wrapper">
 
         <aside id="sidebar" class="active">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-header">Lessons</div>
                 <div class="card-body p-0">
                     <ul class="lesson-list">
-                        @foreach($lesson->lessons() as $lessonL)
+                        @foreach($lessons as $lessonL)
                             <li>
-                                <a href="{{$lessonL->link()}}"
+                                <a href="{{$lessonL->link}}"
                                    class="lesson-item {{ $lessonL->id == $lesson->id ? 'active' : ''  }}">
                                     <div>
-                                        <p>#{{ $lessonL->lesson_number  }} - {{ $lessonL->title  }}</p>
+                                        <p><span class="lesson-number">#{{ $lessonL->lesson_number }}</span>
+                                            - {{ $lessonL->title  }}</p>
                                     </div>
-                                    <p class="text-secondary">{{ date('d-m-Y', strtotime($lessonL->created_at)) }}</p>
+                                    <p class="text-secondary"
+                                       style="font-size: 14px">{{ date('d-m-Y', strtotime($lessonL->created_at)) }}</p>
                                 </a>
                             </li>
                         @endforeach
@@ -66,10 +37,10 @@
 
         <div
                 id="videoContainer"
-                class="lesson-video-section w-100 position-relative sidebar"
+                class="container lesson-video-section w-100 position-relative sidebar"
         >
             <div class="card">
-                <div class="card-header">#{{ $lesson->lesson_number }} - {{ $lesson->title }}</div>
+                <div class="card-header">#{{ $lesson->theTitle }}</div>
                 <div class="card-body position-relative p-0">
                     <div
                             id="toggle-btn"
@@ -96,69 +67,48 @@
                             frameborder="0"
                     ></iframe>
                 </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ $previous }}"
+                           class="btn btn-secondary {{ $previous ? '' : 'disabled' }}" title="Previous"><i
+                                    class="fa-solid fa-angle-left"></i></a>
+                        <a href="{{ $next }}" class="btn btn-primary {{ $next ? '' : 'disabled' }}"
+                           title="Next"><i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="comment-section p-3">
-                <div class="container">
-                    <div class="d-flex justify-content-between mb-3">
-                        <button type="button" class="btn btn-secondary">Previous</button>
-                        <button type="button" class="btn btn-primary">Next</button>
-                    </div>
-                    <div class="form-floating">
-              <textarea
-                      class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea"
-              ></textarea>
-                        <label for="floatingTextarea">Comments</label>
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary mt-3">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card mt-3">
-                        <div class="card-header">Comments</div>
-                        <div class="card-body p-0">
-                            <div class="flex">
-                                <div class="d-flex align-items-start w-100 comment p-">
-                                    <img
-                                            src="https://placehold.co/40"
-                                            class="me-3"
-                                            alt=""
-                                            srcset=""
-                                            style="border-radius: 50%"
-                                    />
-                                    <div class="w-100">
-                                        <h3>n1akai</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Officia, iste?
-                                        </p>
-                                        <div class="d-flex justify-content-end">
-                                            <span class="text-secondary">2 days ago</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start w-100 comment p-">
-                                    <img
-                                            src="https://placehold.co/40"
-                                            class="me-3"
-                                            alt=""
-                                            srcset=""
-                                            style="border-radius: 50%"
-                                    />
-                                    <div class="w-100">
-                                        <h3>n1akai</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Officia, iste?
-                                        </p>
-                                        <div class="d-flex justify-content-end">
-                                            <span class="text-secondary">2 days ago</span>
-                                        </div>
+            <div class="comment-section mt-3">
+                <div class="card mt-3">
+                    <div class="card-header"><i class="fa-solid fa-comments me-2"></i> Comments</div>
+                    <div class="card-body p-0">
+                        <div class="flex">
+                            <div class="d-flex align-items-start w-100 comment p-">
+                                <img
+                                        src="https://placehold.co/40"
+                                        class="me-3"
+                                        alt=""
+                                        srcset=""
+                                        style="border-radius: 50%"
+                                />
+                                <div class="w-100">
+                                    <h3>n1akai</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Officia, iste?
+                                    </p>
+                                    <div class="d-flex justify-content-end">
+                                        <span class="text-secondary">2 days ago</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <textarea class="form-control resize-none" rows="2"></textarea>
+                            <button type="button" class="btn btn-sm btn-primary">
+                                <i class="fa-solid fa-comment me-2"></i>Comment
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -179,6 +129,5 @@
             videoContainer.classList.toggle("sidebar");
             sideBar.classList.toggle("active");
         });
-
     </script>
-@endsection
+</x-layout>

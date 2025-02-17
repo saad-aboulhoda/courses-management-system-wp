@@ -2,71 +2,77 @@
 
 namespace App\Models;
 
+use App\Events\CourseCreated;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
+
     use HasFactory;
 
-    /**
-     * @var string
-     */
+    protected $dispatchesEvents = [
+        'created' => CourseCreated::class
+    ];
+
+    protected $table = 'posts';
     protected $primaryKey = 'ID';
     const CREATED_AT = 'post_date';
     const UPDATED_AT = 'post_modified';
 
-    public function lessons(): HasMany
+    public function meta(): HasMany
     {
-        return $this->hasMany(Lesson::class, 'course_id');
+        return $this->hasMany(PostMeta::class, foreignKey: 'post_id');
     }
 
-    public function thumbnail()
+    public function taxonomies(): BelongsToMany
     {
-        return get_the_post_thumbnail_url($this->ID);
+        return $this->belongsToMany(TermTaxonomy::class, 'term_relationships', 'object_id', 'term_taxonomy_id');
     }
 
-    public function description()
+    public function metaValue($key)
     {
-        return get_post_meta($this->ID, 'th_description', true);
+        return $this->meta->metaValue($key);
     }
 
-    public function instructor()
+    public function children(): HasMany
     {
-        return get_post_meta($this->ID, 'th_instructor', true);
+        return $this->hasMany(Post::class, 'post_parent');
     }
 
-    public function difficulty()
+    public function scopeWithLessons(Builder $query): void
     {
-        return get_post_meta($this->ID, 'th_difficulty', true);
+        $query->with('lessons.course');
     }
 
-    public function totalHours()
+    public function scopeWithMeta(Builder $query): void
     {
-        return get_post_meta($this->ID, 'th_total_hours', true);
+        $query->with('meta');
     }
 
-    public function link()
+    public function scopeWithTaxonomies(Builder $query): void
     {
-        return get_post_permalink($this->ID);
+        $query->with('taxonomies.term');
     }
 
-    public function firstLesson() {
-        return $this->lessons()->first();
+    public function scopeWithChildren(Builder $query): void
+    {
+        $query->with('children');
     }
 
-    public static function fromPost($post): Post
+    public function scopeWithEssentials(Builder $query): void
     {
-        $course = new Post();
-        foreach (get_object_vars($post) as $key => $value) {
-            $course->$key = $value;
-        }
-        return $course;
+        $query->withLessons()->withMeta()->withTaxonomies()->withChildren();
     }
 
-    public static function getCourses()
+    public function thumbnail(): Attribute
     {
-        return self::where('post_type', 'courses')->where('post_status', 'publish')->get();
+        return Attribute::get(fn() => get_the_post_thumbnail_url($this->ID));
     }
+
 }

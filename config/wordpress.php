@@ -100,3 +100,11 @@ define('JETPACK_DEV_DEBUG', config('app.debug'));
 |--------------------------------------------------------------------------
 */
 define('DISABLE_WP_CRON', true);
+
+/*
+|--------------------------------------------------------------------------
+| Redis
+|--------------------------------------------------------------------------
+*/
+define('WP_REDIS_HOST', config('database.redis.default.host'));
+define('WP_REDIS_PORT', config('database.redis.default.port'));

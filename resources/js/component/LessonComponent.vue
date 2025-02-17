@@ -5,7 +5,7 @@ import LessonItemComponent from "./LessonItemComponent.vue";
 import {Sortable} from "sortablejs-vue3";
 import SuccessIconComponent from "./SuccessIconComponent.vue";
 import LoadingIconComponent from "./LoadingIconComponent.vue";
-import config from '../config';
+import config from "../config";
 
 const lessons = ref([]);
 const search = ref('');

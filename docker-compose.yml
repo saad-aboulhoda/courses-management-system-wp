@@ -1,0 +1,100 @@
+services:
+  app:
+    build: .
+    container_name: prod_app
+    restart: unless-stopped
+    environment:
+      - APP_ENV=production
+      - APP_KEY=${APP_KEY}
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - DOMAIN_NAME=localhost
+    networks:
+      - prod_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  nginx:
+    image: nginx:alpine
+    container_name: prod_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+ #     - ./docker/nginx/templates:/etc/nginx/templates
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - prod_network
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.1
+    container_name: prod_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    networks:
+      - prod_network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=root"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:alpine
+    container_name: prod_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - prod_network
+    command: redis-server --save 60 1 --loglevel warning
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: prod_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 256M
+    ports:
+      - "8080:80"
+    networks:
+      - prod_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: prod_mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - prod_network
+
+networks:
+  prod_network:
+    driver: bridge
+
+volumes:
+  app_data:
+    driver: local
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
