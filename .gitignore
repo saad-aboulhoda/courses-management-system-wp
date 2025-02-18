@@ -28,6 +28,7 @@ node_modules/
 /htdocs/cms/
 /htdocs/content/uploads/
 /htdocs/content/upgrade/
+/htdocs/content/object-cache.php
 
 ### Environment Credentials
 .env
