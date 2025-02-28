@@ -30,6 +30,9 @@ searchInput.addEventListener("input", function () {
           data.forEach(function (element) {
             var item = document.createElement("li");
             item.innerHTML = "\n                <li><a href=\"".concat(element.link, "\"><img width=\"48\" height=\"24\" src=\"").concat(element.thumbnail, "\" /><h5 title=\"").concat(element.title, "\">").concat(element.title, "</h5></a></li>\n                ");
+            item.addEventListener("click", function (event) {
+              event.stopPropagation();
+            });
             searchResultContainer.append(item);
           });
         case 7:
@@ -39,10 +42,13 @@ searchInput.addEventListener("input", function () {
     }, _callee);
   })), 300);
 });
+searchInput.addEventListener("click", function (event) {
+  event.stopPropagation();
+});
 searchInput.addEventListener("focusin", function () {
   searchResultContainer.style.display = "block";
 });
-searchInput.addEventListener("focusout", function () {
+document.body.addEventListener("click", function () {
   searchResultContainer.style.display = "none";
 });
 function inputFilter(inputId, list, item) {

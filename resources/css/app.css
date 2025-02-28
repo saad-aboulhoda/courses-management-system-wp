@@ -129,6 +129,10 @@ header .navbar-brand {
     font-size: 20px !important;
 }
 
+header .navbar-brand:hover {
+    color: var(--primary-hover);
+}
+
 header nav ul li a {
     font-size: 14px !important;
 }

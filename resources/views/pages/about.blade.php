@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-6">
                     <img style="object-fit: cover; width: 600px; height: 300px"
-                         src="http://127.0.0.1:8000/content/uploads/2025/01/compare-fibre-Y8TiLvKnLeg-unsplash.jpg"
+                         src="/content/uploads/2025/01/compare-fibre-Y8TiLvKnLeg-unsplash.jpg"
                          alt="Online Learning" class="img-fluid rounded shadow">
                 </div>
             </div>
@@ -94,7 +94,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card text-center team-member">
                         <img style="object-fit: cover; width: 200px; height: 200px"
-                             src="http://127.0.0.1:8000/content/uploads/2025/01/jonas-kakaroto-mjRwhvqEC0U-unsplash.jpg"
+                             src="/content/uploads/2025/01/jonas-kakaroto-mjRwhvqEC0U-unsplash.jpg"
                              class="card-img-top rounded-circle mx-auto mt-4" alt="Team Member">
                         <div class="card-body">
                             <h5 class="card-title">Sarah Johnson</h5>
@@ -105,7 +105,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card text-center team-member">
                         <img style="object-fit: cover; width: 200px; height: 200px"
-                             src="http://127.0.0.1:8000/content/uploads/2025/01/vicky-hladynets-C8Ta0gwPbQg-unsplash-1.jpg"
+                             src="/content/uploads/2025/01/vicky-hladynets-C8Ta0gwPbQg-unsplash-1.jpg"
                              class="card-img-top rounded-circle mx-auto mt-4" alt="Team Member">
                         <div class="card-body">
                             <h5 class="card-title">Michael Chen</h5>
