@@ -34,7 +34,7 @@ class CourseController extends Controller
             $courses[] = [
                 'title' => $item->post_title,
                 'description' => $item->description,
-                'thumbnail' => $item->thumbnail(),
+                'thumbnail' => $item->thumbnail,
                 'link' => $item->link
             ];
         }
