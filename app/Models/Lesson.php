@@ -27,7 +27,7 @@ class Lesson extends Model
 
     public function course(): BelongsTo
     {
-        return $this->belongsTo(Post::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     public function link(): Attribute
